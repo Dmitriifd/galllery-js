@@ -1,9 +1,6 @@
 import { createElem } from './createElem.js';
 
 export const renderPhoto = (photoWrapper, photo) => {
-	const url = new URL(location.href);
-	console.log(url.searchParams.get('photo'));
-
 	const img = createElem('img', {
 		className: 'photo__picture',
 		src: photo.urls.regular,
@@ -37,6 +34,10 @@ export const renderPhoto = (photoWrapper, photo) => {
 		id: photo.id,
 		textContent: photo.likes,
 	});
+
+	if (!photoLike.likedByUser) {
+		photoLike.classList.add('photo__like_o');
+	}
 
 	const photoDownload = createElem('a', {
 		className: 'photo__download',
