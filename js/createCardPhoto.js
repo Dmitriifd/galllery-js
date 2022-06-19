@@ -6,9 +6,12 @@ const loadImage = (url, description) => {
 		img.width = 200;
 		img.src = url;
 		img.alt = description;
-        img.addEventListener('load', () => {
-            resolve(img)
-        })
+		img.addEventListener('load', () => {
+			resolve(img);
+		});
+		img.addEventListener('error', (err) => {
+			reject(new Error(err));
+		});
 	});
 };
 
@@ -31,13 +34,13 @@ export const createCardPhoto = async (data) => {
 	});
 
 	const avatarAuthor = createElem('img', {
-        className: 'author__photo',
-        width: '32',
-        height: '32',
-        src: data.user.profile_image.medium,
-        alt: data.user.bio,
-        title: data.user.username,
-    });
+		className: 'author__photo',
+		width: '32',
+		height: '32',
+		src: data.user.profile_image.medium,
+		alt: data.user.bio,
+		title: data.user.username,
+	});
 
 	author.append(avatarAuthor);
 
