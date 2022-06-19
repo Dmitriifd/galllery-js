@@ -13,7 +13,15 @@ export const getData = async ({ page = 1, count, idPhoto }) => {
 		url.pathname += `/${idPhoto}`;
 	}
 
-	const response = await fetch(url);
+    const headers = {}
+
+    if (localStorage.getItem('Bearer')) {
+        headers.Authorization = `Bearer ${localStorage.getItem('Bearer')}`;
+    }
+
+	const response = await fetch(url, {
+        headers: {}
+    });
 	const data = await response.json();
 	return data;
 };
